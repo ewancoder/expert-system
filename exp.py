@@ -39,8 +39,9 @@ class Menu():
             "So, you like beauty. Beauty of design, hardware and software. And you're not the poor guy. Why do you need to switch OS?",
             "Hah, I knew you'd be a Windows user. Why else you would try to switch OS? Anyway, without jokes, what don't you like about Windows?",
             "Oh, you're tough! You're real serious man, dude! I don't wanna trouble... So quit this test, there's no place for you here. You're already ZEN.",
-            "Now that we discovered that currently you prefer " + self.current + ", let's discuss common questions. It is known that overall look of the room is a great indicator of personality. So, describe your room.",
-            "What application do you expect to use the most?"
+            "It is known that overall look of the room is a great indicator of personality. So, describe your room.",
+            "What application do you expect to use the most?",
+            "Do you know how to make programs?"
         )
         self.items = (
             (
@@ -81,8 +82,15 @@ class Menu():
                 ["Simple office software", [aset('lin', 3), aset('mac', 2), aset('win', 4)]],
                 ["Powerful calculation and science programs: data maintenance", [aset('lin', 4), aset('win', 2)]],
                 ['SCADA programs and powerful engineering paid software', [aset('win', 5)]],
-                ['Video editing software', [aset('win', 4), aset('mac', 6)]]
+                ['Video editing software', [aset('win', 4), aset('mac', 6)]],
+                ['Server or supercomputer claster', [aset('lin', 6)]]
             ),
+            (
+                ["Of course!", [aset('lin', 5), aset('mac', 3)]],
+                ["Eeeh... I wrote some basic Hello World programs on BASIC", [aset('win', 2), aset('lin', 3)]],
+                ["Nope", [aset('win', 4)]],
+            )
+
         )
         self.message = interface.Message(surface)
 
