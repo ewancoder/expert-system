@@ -22,7 +22,6 @@ class Menu():
     win = 0 #Windows points
     mac = 0 #MacOS points
     lin = 0 #Linux points
-    bsd = 0 #BSD
 
     def __init__(self, surface):
         def aset(attr, value):
@@ -45,50 +44,50 @@ class Menu():
         )
         self.items = (
             (
-                ['Yes', []],
-                ['No', lambda: quit()]
+                ['I need another OS', []],
+                ["I don't need another OS", [lambda: quit()]]
             ),
             (
-                ['Linux', [aset('current', 'lin')]],
-                ['MacOS', [aset('current', 'mac'), aset('step', 2)]],
-                ['Windows', [aset('current', 'win'), aset('step', 3)]],
-                ['BSD', [aset('current', 'bsd'), aset('step', 4)]]
+                ['Linux', [aset('current', 0)]],
+                ['MacOS', [aset('current', 1), aset('step', 2)]],
+                ['Windows', [aset('current', 2), aset('step', 3)]],
+                ['BSD', [aset('current', 0), aset('step', 4)]]
             ),
             (
-                ['I am geek', [aset('step', 5), aset('lin', 5)]],
-                ["I'm just regular ubuntu user", [aset('step', 5)]],
+                ['I am a geek', [aset('step', 5), aset('lin', 5)]],
+                ["I'm just regular ubuntu user, I like fancy windows and glowing buttons", [aset('step', 5), aset('mac', 2)]],
                 ['Neither. I am advanced user using linux for server purposes or other means', [aset('step', 5), aset('lin', 2)]]
             ),
             (
-                ["I'm bored with perfectness. Need something raw.", [aset('step', 5), aset('win', 3)]],
+                ["I'm bored with perfectness. Need something raw.", [aset('step', 5), aset('win', 3), aset('lin', 1)]],
                 ["I love my MAC. I just curious about test results.", [aset('step', 5), aset('mac', 2)]],
-                ['I am displeased about MAC and need something more perfect', [aset('step', 5), aset('mac', -2)]]
+                ['I am displeased about MAC and need something more perfect', [aset('step', 5), aset('mac', -4)]]
             ),
             (
                 ["I don't like viruses, system errors and slow loading", [aset('step', 5), aset('lin', 4), aset('mac', 1), aset('win', -2)]],
-                ["I don't like OS design. Everything else is perfect.", [aset('step', 5), aset('mac', 2)]],
-                ['I like Windows. Just curious about Unix.', [aset('step', 5), aset('win', 3)]]
+                ["I don't like OS design. Everything else is perfect.", [aset('step', 5), aset('mac', 3)]],
+                ['I like Windows. Just curious about Unix.', [aset('step', 5), aset('win', 3), aset('lin', 1)]]
             ),
             (
-                ["Okay", lambda: quit()],
-                ["Hell no! I'm gonna continue cause I'm super cool BSD Man!", [aset('step', 5), aset('bsd', 5)]]
+                ["Okay", [lambda: quit()]],
+                ["Hell no! I'm gonna continue cause I'm super cool BSD Man!", [aset('step', 5), aset('lin', 1)]]
             ),
             (
-                ["It's really messy just like on this photo, I just too lazy to clean up", [aset('lin', 1), aset('mac', -4), aset('win', 3)]],
+                ["It's really messy just like on this photo, I just too lazy to clean up", [aset('lin', 1), aset('mac', -2), aset('win', 3)]],
                 ["It is messy just on the table, and I can find anything I want. It is 'creative' mess", [aset('lin', 4), aset('win', 1)]],
-                ['It is really clean. All is just perfect.', [aset('mac', 5), aset('win', -1)]]
+                ['It is really clean. All is just perfect.', [aset('mac', 5)]]
             ),
             (
-                ["Simple office software", [aset('lin', 3), aset('mac', 2), aset('win', 4)]],
-                ["Powerful calculation and science programs: data maintenance", [aset('lin', 4), aset('win', 2)]],
-                ['SCADA programs and powerful engineering paid software', [aset('win', 5)]],
-                ['Video editing software', [aset('win', 4), aset('mac', 6)]],
+                ["Simple office software", [aset('lin', 2), aset('mac', 3), aset('win', 4)]],
+                ["Powerful calculation and science programs: data maintenance, programming", [aset('lin', 4), aset('win', 2)]],
+                ['SCADA programs and powerful engineering paid software', [aset('win', 5), aset('lin', -3)]],
+                ['Video editing software', [aset('win', 4), aset('mac', 6), aset('lin', -2)]],
                 ['Server or supercomputer claster', [aset('lin', 6)]]
             ),
             (
                 ["Of course!", [aset('lin', 5), aset('mac', 3)]],
-                ["Eeeh... I wrote some basic Hello World programs on BASIC", [aset('win', 2), aset('lin', 3)]],
-                ["Nope", [aset('win', 4)]],
+                ["Eeeh... I wrote some basic Hello World programs on BASIC", [aset('win', 3), aset('lin', 2)]],
+                ["Nope, I just wanna gaming", [aset('win', 5)]],
             )
 
         )
@@ -96,8 +95,147 @@ class Menu():
 
     def loop(self): #settings is settings object (current state already, save-loaded outside, in game.py file)
         clock = pg.time.Clock()
-        self.menu = interface.Menu(self.items[self.step])
-        self.BG = pg.transform.scale(pg.image.load('Images/' + str(self.step) + '.jpg'), SIZE)
+        if self.step != 100:
+            self.menu = interface.Menu(self.items[self.step])
+            self.BG = pg.transform.scale(pg.image.load('Images/' + str(self.step) + '.jpg'), SIZE)
+        else:
+            self.menu = interface.Menu((
+                ["Okay", [lambda: quit()]],
+                ["Quit", [lambda: quit()]]
+            ))
+            self.BG = pg.transform.scale(pg.image.load('Images/final.jpg'), SIZE)
+            #CONDITION based on "lin", "win" and "mac" + "current"
+            summary = self.lin + self.mac + self.win
+            linux = self.lin * 100 / (summary)
+            macos = self.mac * 100 / (summary)
+            windows = self.win * 100 / (summary)
+            linuxText = [(
+                "zero",
+                "first",
+                "second",
+                "third",
+                "fourth",
+                "fifth",
+                "sixth"
+            ),
+            (
+                "zero",
+                "first",
+                "second",
+                "third",
+                "fourth",
+                "fifth",
+                "sixth"
+            ),
+            (
+                "zero",
+                "first",
+                "second",
+                "third",
+                "fourth",
+                "fifth",
+                "sixth"
+            )]
+            macosText = [(
+                "zero",
+                "first",
+                "second",
+                "third",
+                "fourth",
+                "fifth",
+                "sixth"
+            ),
+            (
+                "zero",
+                "first",
+                "second",
+                "third",
+                "fourth",
+                "fifth",
+                "sixth"
+            ),
+            (
+                "zero",
+                "first",
+                "second",
+                "third",
+                "fourth",
+                "fifth",
+                "sixth"
+            )]         
+            windowsText = [(
+                "zero",
+                "first",
+                "second",
+                "third",
+                "fourth",
+                "fifth",
+                "sixth"
+            ),
+            (
+                "zero",
+                "first",
+                "second",
+                "third",
+                "fourth",
+                "fifth",
+                "sixth"
+            ),
+            (
+                "zero",
+                "first",
+                "second",
+                "third",
+                "fourth",
+                "fifth",
+                "sixth"
+            )]
+            if linux <= 0:
+                ltext = linuxText[self.current][0]
+            elif 0 < linux <= 10:
+                ltext = linuxText[self.current][1]
+            elif 10 < linux <= 20:
+                ltext = linuxText[self.current][2]
+            elif 20 < linux <= 30:
+                ltext = linuxText[self.current][3]
+            elif 30 < linux <= 40:
+                ltext = linuxText[self.current][4]
+            elif 40 < linux <= 50:
+                ltext = linuxText[self.current][5]
+            elif 50 < linux <= 100:
+                ltext = linuxText[self.current][6]
+
+            if macos <= 0:
+                mtext = macosText[self.current][0]
+            elif 0 < macos <= 10:
+                mtext = macosText[self.current][1]
+            elif 10 < macos <= 20:
+                mtext = macosText[self.current][2]
+            elif 20 < macos <= 30:
+                mtext = macosText[self.current][3]
+            elif 30 < macos <= 40:
+                mtext = macosText[self.current][4]
+            elif 40 < macos <= 50:
+                mtext = macosText[self.current][5]
+            elif 50 < macos <= 100:
+                mtext = macosText[self.current][6]
+
+            if windows <= 0:
+                wtext = windowsText[self.current][0]
+            elif 0 < windows <= 10:
+                wtext = windowsText[self.current][1]
+            elif 10 < windows <= 20:
+                wtext = windowsText[self.current][2]
+            elif 20 < windows <= 30:
+                wtext = windowsText[self.current][3]
+            elif 30 < windows <= 40:
+                wtext = windowsText[self.current][4]
+            elif 40 < windows <= 50:
+                wtext = windowsText[self.current][5]
+            elif 50 < windows <= 100:
+                wtext = windowsText[self.current][6]
+
+            self.finalText = 'Congratulations! You have finished the test. So... ' + ltext + mtext + wtext
 
         while True:
             clock.tick(30)
@@ -115,7 +253,10 @@ class Menu():
             self.surface.fill(0)
             self.surface.blit(self.BG, (0, 0))
             self.menu.draw(self.surface)
-            self.message.draw(self.text[self.step])
+            if self.step != 100:
+                self.message.draw(self.text[self.step])
+            else:
+                self.message.draw(self.finalText)
 
             pg.display.flip()
 
@@ -126,6 +267,8 @@ if __name__ == '__main__':
     while True:
         menuScreen.loop()
         menuScreen.step += 1
-        if menuScreen.step == 10:
+        if menuScreen.step == len(menuScreen.text):
             break
+    menuScreen.step = 100
+    menuScreen.loop()
     pg.quit()
