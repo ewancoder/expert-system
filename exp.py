@@ -40,7 +40,10 @@ class Menu():
             "Oh, you're tough! You're real serious man, dude! I don't wanna trouble... So quit this test, there's no place for you here. You're already ZEN.",
             "It is known that overall look of the room is a great indicator of personality. So, describe your room.",
             "What application do you expect to use the most?",
-            "Do you know how to make programs?"
+            "Do you know how to make programs?",
+            "Do you like gaming?",
+            "What comcept do you like the most?",
+            "What kind of machine do you have?"
         )
         self.items = (
             (
@@ -88,8 +91,23 @@ class Menu():
                 ["Of course!", [aset('lin', 5), aset('mac', 3)]],
                 ["Eeeh... I wrote some basic Hello World programs on BASIC", [aset('win', 3), aset('lin', 2)]],
                 ["Nope, I just wanna gaming", [aset('win', 5)]],
+            ),
+            (
+                ["Yeah, sure! I'm downloding pirate torrents each day!", [aset('win', 5)]],
+                ["Yeah, I'm gaming with Steam and licence games only.", []],
+                ["No, I use computer strictly for work (maybe little small games sometimes)", [aset('lin', 2), aset('mac', 2)]],
+            ),
+            (
+                ["Everything is FREE and OpenSource. Freedom is cool.", [aset('lin', 3)]],
+                ["Everything smooth and well-designed. Art is cool.", [aset('mac', 3)]],
+                ["I just want my OS to work out of the box and support popular software. Support is cool.", [aset('win', 3)]],
+            ),
+            (
+                ["Gaming powerful machine.", [aset('win', 3)]],
+                ["Mac", [aset('mac', 5)]],
+                ["Supercomputer", [aset('lin', 6)]],
+                ["Netbook", [aset("lin", 3)]]
             )
-
         )
         self.message = interface.Message(surface)
 
@@ -110,85 +128,76 @@ class Menu():
             macos = self.mac * 100 / (summary)
             windows = self.win * 100 / (summary)
             linuxText = [(
-                "zero",
-                "first",
-                "second",
-                "third",
-                "fourth",
-                "fifth",
-                "sixth"
+                "How do you even use Linux when you hate it so much? You're definitely not a Linux user, try to switch to anything else.",
+                "Well, you aren't into Linux for sure, although it's your current OS. I'd suggest you try something else.",
+                "You use Linux every day? I doubt it. Even though you use it, it seems like something else suits your needs better.",
+                "You use Linux and you love it, but not quite passionate and admirable as it's you life choice. You have little intention to switch OS, so try it!",
+                "It seems your life choice is right: Linux suits you perfectly. Although, it could suit you better. You can try switching OS if you'd like new experience.",
+                "You life choice is perfect indeed! Linux system is the most suitable system for your needs and desires. Don't switch OS unless you definitely need to.",
             ),
             (
-                "zero",
-                "first",
-                "second",
-                "third",
-                "fourth",
-                "fifth",
-                "sixth"
+                "You seem to hate Linux so much it's even odd coming from a MAC user.",
+                "For a MAC user you have strangely little interest in Linux.",
+                "You don't need to switch to Linux unless you want to discover advantages over your MAC. It's not for you obviously, although you have a little interest in it.",
+                "So you'd like to try Linux. You can try. For a MAC user, it'd be an easy change. You just have to get used to typing into terminal more.",
+                "You seem to like Linux very much, although you're MAC user. You want to become a geek? Suit yourself!",
+                "Linux is just perfect OS for you. Abandon your f**king MAC! Go suit your needs using the power of Linux.",
             ),
             (
-                "zero",
-                "first",
-                "second",
-                "third",
-                "fourth",
-                "fifth",
-                "sixth"
+                "You hate Linux almost as passionate as Windows user :)",
+                "You have almost none interest in Linux. It's common amidst Windows user who are usually ignorant.",
+                "Your little interest in Linux compensated by common Windows software (and games). Am I right? So try installing VirtualBox and trying out some Linux distro.",
+                "You have little urge to discover Linux, although not so passionate as other OS. So try it if you want. Just remember: it's not Windows :)",
+                "You're surely into Linux. I guess, the only thing that holding you back on Windows is software or games.",
+                "You love Linux SO MUCH that you should remove your Windows right NOW and install fresh Arch Linux distro at once :)",
             )]
             macosText = [(
-                "zero",
-                "first",
-                "second",
-                "third",
-                "fourth",
-                "fifth",
-                "sixth"
+                "You are truly HATE it. You hate it so much that I guess you're messing with your room just to prove you're not MAC user. I guess you're just hardcore GEEK who LOVES console and ASCII.",
+                "You have almost none interest in MasOS. You are surely not a designer or video editor, considering you are a Linux user.",
+                "MAC is definitely not your choice. Although you're little interested in it.",
+                "You should probably at least try MAC. After Linux it'd be an easy change, considering your interest in it.",
+                "You are surely would LOVE to use MAC. You have so many hints that you're into it. Try to switch from Linux, it'd worth it.",
+                "You LOVE MAC so much that you're even probably going to MAC-donalds just to prove that you're MAC fan. You should definitely switch from Linux, I say you that!",
             ),
             (
-                "zero",
-                "first",
-                "second",
-                "third",
-                "fourth",
-                "fifth",
-                "sixth"
+                "Why do you use MAC if you HATE it so much? Try to switch to anything else as fast as possible for your own good.",
+                "You don't have much intention to use MAC. So try to switch to something else.",
+                "MAC's not your choice, but you have some interest in it. Situation is curious cause you're actually a MAC user. I'd recommend you to try out something new.",
+                "You like MAC little, but you like it. You may stay with your choice or try to switch to something else.",
+                "You are surely LOVE your MAC. But also you are ocnsidering other OS. So try it out if you want but don't get too excited: MAC is best choice for you.",
+                "MAC is the most awesome OS you've ever known and you LOVE it. You don't need another OS at all.",
             ),
             (
-                "zero",
-                "first",
-                "second",
-                "third",
-                "fourth",
-                "fifth",
-                "sixth"
+                "You hate MAC with all your soul. Don't try to use it or else!",
+                "You have no interest in MacOS, it's common among Windows users.",
+                "You are interested in MAC, but you are not fond of it. Try it over virtualbox first and don't forget: for your needs other OS would be better choice.",
+                "MAC is surely intriguing you as Windows user who never saw Unix system. But it's not perfect for your needs, so try it carefully.",
+                "You LOVE mac and it suits for your needs pretty good. I suggest you use it as alternative for Windows or as second OS.",
+                "You LOVE mac and it PERFECT for your needs. So f*ck Windows! Switch to MAC immediately! I command it!",
             )]         
             windowsText = [(
-                "zero",
-                "first",
-                "second",
-                "third",
-                "fourth",
-                "fifth",
-                "sixth"
+                "You hate Windows as hell! Don't use it EVER. As Linux user, you are supported.",
+                "You have no interest for Windows at all and it doesn't suits your needs. So don't use it unless you forced to.",
+                "You have little interest in Windows, and I guess this isn't gonna help you to switch to it because you already using Linux.",
+                "You need Windows for your goals or you just like it. But this is little love you have, so you don't need to switch to it instantly.",
+                "You LOVE Windows and you need it for your goals. But ALSO you can use another OS, so don't rush with conclusions. Although, Windows would be better choice for you.",
+                "You NEED windows HARD. This is the BEST and PERFECT choice for you. So what are you doing with Linux?",
             ),
             (
-                "zero",
-                "first",
-                "second",
-                "third",
-                "fourth",
-                "fifth",
-                "sixth"
+                "You hate Windows as hell! Don't use it EVER.",
+                "You have no interest for Windows at all and it doesn't suits your needs. So don't use it unless you forced to.",
+                "You have little interest in Windows, although considering you're MAC user, this is strange. Maybe you just need powerful SCADA or gaming.",
+                "You need Windows for your goals or you just like it. But this is little love you have, so you don't need to switch to it instantly.",
+                "You LOVE Windows and you need it for your goals. But ALSO you can use another OS, so don't rush with conclusions. Although, Windows would be better choice for you.",
+                "You NEED windows HARD. This is the BEST and PERFECT choice for you. So what are you doing with MAC?",
             ),
             (
-                "zero",
-                "first",
-                "second",
-                "third",
-                "fourth",
-                "fifth",
-                "sixth"
+                "You hate Windows as hell! Why do you use it at all?",
+                "You have no interest for Windows at all and it doesn't suits your needs. So switch it off to something else!",
+                "You have little interest in Windows, but you are using it as your OS. Are you gamer or student?",
+                "You need Windows for your goals and you like it. But this is little love you have, so you can consider switching OS.",
+                "You LOVE Windows and you need it for your goals. So you are right about your OS choice. But you can ALSO try another OS if you wish.",
+                "Your life choice is right. Windows is the BEST and PERFECT choice for you.",
             )]
             if linux <= 0:
                 ltext = linuxText[self.current][0]
@@ -200,10 +209,8 @@ class Menu():
                 ltext = linuxText[self.current][3]
             elif 30 < linux <= 40:
                 ltext = linuxText[self.current][4]
-            elif 40 < linux <= 50:
+            elif 40 < linux <= 100:
                 ltext = linuxText[self.current][5]
-            elif 50 < linux <= 100:
-                ltext = linuxText[self.current][6]
 
             if macos <= 0:
                 mtext = macosText[self.current][0]
@@ -215,10 +222,8 @@ class Menu():
                 mtext = macosText[self.current][3]
             elif 30 < macos <= 40:
                 mtext = macosText[self.current][4]
-            elif 40 < macos <= 50:
+            elif 40 < macos <= 100:
                 mtext = macosText[self.current][5]
-            elif 50 < macos <= 100:
-                mtext = macosText[self.current][6]
 
             if windows <= 0:
                 wtext = windowsText[self.current][0]
@@ -230,12 +235,11 @@ class Menu():
                 wtext = windowsText[self.current][3]
             elif 30 < windows <= 40:
                 wtext = windowsText[self.current][4]
-            elif 40 < windows <= 50:
+            elif 40 < windows <= 100:
                 wtext = windowsText[self.current][5]
-            elif 50 < windows <= 100:
-                wtext = windowsText[self.current][6]
 
-            self.finalText = 'Congratulations! You have finished the test. So... ' + ltext + mtext + wtext
+            link = [' Also, ', ' Now, ', ' Well, ', ' So, ', ' Meanwhile ']
+            self.finalText = 'Congratulations! You have finished the test. So... ' + ltext + random.choice(link) + mtext + random.choice(link) + wtext
 
         while True:
             clock.tick(30)
