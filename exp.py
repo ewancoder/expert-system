@@ -14,7 +14,6 @@ CAPTION = 'Expert System "Best Operation System Choice"'
 SIZE = (1366,768)
 
 class Menu():
-    MUSIC = pg.mixer.Sound('music.ogg')
     step = 0
 
     current = '' #Your current OS
@@ -250,9 +249,6 @@ class Menu():
                     quit()
             if self.menu.events(events) == 'Next':
                 return
-
-            if not pg.mixer.get_busy():
-                self.MUSIC.play(-1)
 
             self.surface.fill(0)
             self.surface.blit(self.BG, (0, 0))
